@@ -1,0 +1,256 @@
+[
+    {
+        "ruleName": "EndDonationDueToACReaction",
+        "conditions": {
+            "all": [
+                {
+                    "fact": "donorHasACReactionSymptoms",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "reactionSeverity",
+                    "operator": "equal",
+                    "value": "high"
+                }
+            ]
+        },
+        "outcome": "End donation, AC toxicity reached"
+    },
+    {
+        "ruleName": "EndDonationDueToACBuildup",
+        "conditions": {
+            "all": [
+                {
+                    "fact": "donorHasACReactionSymptoms",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "reactionSeverity",
+                    "operator": "inRange",
+                    "value": ["low", "medium"]
+                },
+                {
+                    "fact": "donorCurrentDonationReaction",
+                    "operator": "equal",
+                    "value": 3
+                }
+            ]
+        },
+        "outcome": "End donation, AC toxicity buildup"
+    },
+    {
+        "ruleName": "LowerACConcentration",
+        "conditions": {
+            "all": [
+                {
+                    "fact": "donorHasACReactionSymptoms",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "donorCurrentDonationReaction",
+                    "operator": "lessThan",
+                    "value": 3
+                },
+                {
+                    "fact": "donorEBV",
+                    "operator": "lessThanOrEqual",
+                    "value": 5.5
+                },
+                {
+                    "fact": "reactionSeverity",
+                    "operator": "inRange",
+                    "value": ["low", "medium"]
+                },
+                {
+                    "fact": "lowerPlateletsCount",
+                    "operator": "lessThan",
+                    "value": 250
+                }
+            ]
+        },
+        "outcome": "Inform nurse and lower AC concentration"
+    },
+    {
+        "ruleName": "AdjustNeedle - 1",
+        "conditions": {
+            "all": [
+                {
+                    "fact": "needleAdjusted",
+                    "operator": "equal",
+                    "value": 0
+                },
+                {
+                    "fact": "cuffPressureON",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "isNeedleVibrating",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "heathpadON",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "machineRedSquares",
+                    "operator": "inRange",
+                    "value": [3, 6]
+                },
+                {
+                    "fact": "machineRedSquaresVarianceInCicles",
+                    "operator": "lessThanOrEqual",
+                    "value": 2
+                }
+            ]
+        },
+        "outcome": "First needle adjustment"
+    },
+    {
+        "ruleName": "AdjustNeedle - 2",
+        "conditions": {
+            "all": [
+                {
+                    "fact": "needleAdjusted",
+                    "operator": "equal",
+                    "value": 1
+                },
+                {
+                    "fact": "cuffPressureON",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "isNeedleVibrating",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "heathpadON",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "machineRedSquares",
+                    "operator": "inRange",
+                    "value": [5, 9]
+                },
+                {
+                    "fact": "machineRedSquaresVarianceInCicles",
+                    "operator": "inRange",
+                    "value": [0, 7]
+                }
+            ]
+        },
+        "outcome": "Second needle adjustment"
+    },
+    {
+        "ruleName": "LowerReturnSpeed",
+        "conditions": {
+            "all": [
+                {
+                    "fact": "isDonorSqueezingDuringReturn",
+                    "operator": "equal",
+                    "value": "no"
+                },
+                {
+                    "fact": "isCuffpressureHigh",
+                    "operator": "equal",
+                    "value": "no"
+                },
+                {
+                    "fact": "pressureBarGoingToYellow",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "timePressureBarGoingToYellowInSeconds",
+                    "operator": "greaterThanOrEqual",
+                    "value": 4
+                },
+                {
+                    "fact": "donationElapsedTime",
+                    "operator": "greaterThan",
+                    "value": 5
+                }
+            ]
+        },
+        "outcome": "Lower return speed from terminal"
+    },
+    {
+        "ruleName": "pauseMachineDueToACReaction",
+        "conditions": {
+            "all": [
+                {
+                    "fact": "donorHasACReactionSymptoms",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "donorCurrentDonationReaction",
+                    "operator": "lessThan",
+                    "value": 3
+                },
+                {
+                    "fact": "donorEBV",
+                    "operator": "inRange",
+                    "value": [5.6, 7.5]
+                },
+                {
+                    "fact": "reactionSeverity",
+                    "operator": "inRange",
+                    "value": ["low", "medium"]
+                },
+                {
+                    "fact": "donorSex",
+                    "operator": "equal",
+                    "value": "M"
+                },
+                {
+                    "fact": "lowerPlateletsCount",
+                    "operator": "greaterThanOrEqual",
+                    "value": 250
+                }
+            ]
+        },
+        "outcome": "Pause machine for 1 minute and inform nurse"
+    },
+    {
+        "ruleName": "EndDonationDueToLowDraw",
+        "conditions": {
+            "all": [
+                {
+                    "fact": "needleAdjusted",
+                    "operator": "equal",
+                    "value": 2
+                },
+                {
+                    "fact": "cuffPressureON",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "heathpadON",
+                    "operator": "equal",
+                    "value": "yes"
+                },
+                {
+                    "fact": "machineRedSquares",
+                    "operator": "greaterThanOrEqual",
+                    "value": 10
+                },
+                {
+                    "fact": "machineRedSquaresVarianceInCicles",
+                    "operator": "lessThanOrEqual",
+                    "value": 3
+                }
+            ]
+        },
+        "outcome": "End donation, give rinseback"
+    }
+]
