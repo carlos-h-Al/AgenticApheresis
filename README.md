@@ -6,6 +6,8 @@
 
 This project aims to tackle the lack of automation in the healthcare sector, especially in the blood components (apheresis) donations. I created a simulation environment where virtual donors donate platelets. The simulation design was inspired by the **Trima machine** from *Terumo*, which is the machine currently used by NHS Blood and Trasnplant to collect blood components. The goal is to further increase the machine automation by building an AI agent capable of requesting assistance from staff, answering donors queries, flagging donors side effects to nurses and staff members and performing the right adjustments when necessary.
 
+The true innovation of this project lies in its shift from the narrow automation of a single physiological parameter, to the development of a comprehensive, **semi-autonomous AI Agentic Healthcare Assistant.**
+
 The agent uses a `Random Forest` (RF) classifier, and its inference output correspond to what action the agent needs to take. The RF model was trained based on a set of rules written by an **NHSBT healthcare assistant**, specialised in platelets donations. 
 
 The rules are not as strict as they would be for a live scenario, as this project is meant to be a step towards automation, and it is not meant to bridge the gap entirely.
